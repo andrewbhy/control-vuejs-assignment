@@ -1,9 +1,10 @@
 <template>
   <div id="app">
 
-    <TopNav></TopNav>
-   
-    <router-view></router-view>
+    <TopNav/>
+    <div class="content-container">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -20,6 +21,12 @@ export default {
 </script>
 
 <style lang="less">
+
+.content-container {
+  width : 80%;
+  margin : auto;
+}
+
 body {
   margin : 0px !important;
   padding : 0px !important;

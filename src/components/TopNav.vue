@@ -1,6 +1,6 @@
 <template>
-  <div class="top-nav container">
-
+  <div class="top-nav">
+    <div class="content-container" >
     <div class="logo-container">
         <Logo/>
     </div>
@@ -11,6 +11,7 @@
                 Login
             </ul>
         </section>
+    </div>
     </div>
 
   </div>
