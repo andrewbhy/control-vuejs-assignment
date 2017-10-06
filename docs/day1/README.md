@@ -47,6 +47,7 @@
 
 - Not being a dedicated front-end dev, I do not know what is the best-practice when constructing html+css layouts;  Not sure what tags to pick, what nesting structures are ideal to build layout such as the top nav bar.
 - Some shops require that designers generate html+css when other do not.  Would this be the responsiblith of front-end developer?
+- I have attempted to set up LESS and library of common variables to be shared by all components.  However, variables in imported .less files are not available in the .vue components.  Decided to shelve this feature for now and continue with development
 
 
 # Progress So Far :
