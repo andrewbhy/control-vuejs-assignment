@@ -1,5 +1,5 @@
 
-# Goal for Day 1 : Oct 5
+# Goals for Day 1 : Oct 5
 
 - [] Get familiar with essentials of Vue.js and the scaffolding
     - [x] Using single file components
