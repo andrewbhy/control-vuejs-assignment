@@ -2,6 +2,12 @@
 
 > front end showcase and learning experience
 
+
+# Progress
+
+- [Day 1 ](DAY1.md) 
+
+
 ## Build Setup
 
 ``` bash

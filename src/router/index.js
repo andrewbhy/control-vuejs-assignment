@@ -15,9 +15,8 @@ export default new Router({
     },
     {
       path: '/about',
-      name: 'Vuewjs Scallfolding',
+      name: 'Vue.js Scallfolding',
       component: Hello
-
     }
   ]
 })
