@@ -1,5 +1,5 @@
 <template>
-  <div class="top-nav">
+  <div class="top-nav container">
 
     <div class="logo-container">
         <Logo/>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import '@/styles/lib.less'
 import Logo from '@/components/Logo.vue' // note that the extension .vue is needed unlike .js files
 
 export default {
@@ -27,21 +28,24 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 .top-nav {
     height:79px;
     position: fixed;
-    background-color: #14212c;
+    background-color:  #14212c;;
     width : 100%;
     top : 0px;
-    /*padding : 20px;*/
+
 }
 .logo-container {
     position : absolute;
-   
+    padding-left: 10px;
+    padding-top : 20px;
 }
 .top-nav-menu {
-
+    float : right;
+    padding-top : 10px;
+    padding-right: 10px;
     color: white;
 
 }

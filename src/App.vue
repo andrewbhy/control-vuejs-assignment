@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import './styles/lib.less'
 import TopNav from '@/components/TopNav.vue' // note that the extension .vue is needed unlike .js files
 
 export default {
@@ -18,24 +19,17 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 body {
   margin : 0px !important;
   padding : 0px !important;
-}
-#app {
-  top : 0px;
-}
 
-
-/*
-#app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
-*/
+
+#app {
+  top : 0px;
+}
 </style>

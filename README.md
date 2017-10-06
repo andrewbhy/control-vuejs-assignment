@@ -5,7 +5,7 @@
 
 # Progress
 
-- [Day 1 ](DAY1.md) 
+- [Day 1 ](docs/day1/README.md) 
 
 
 ## Build Setup
