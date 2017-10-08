@@ -6,7 +6,7 @@
     - [x] Build user login widget component ( dipslays login button when not logged in, display logged in user after logging in)
     - [x] Finish html/css layout
 - implement login api 
-    - [ ] learn Axios http client library which is often recommended for use in vuejs projects
+    - [ ] learn Axios http client library which is often recommended for use in vuejs projects ( https://alligator.io/vuejs/rest-api-axios/ )
     - [ ] get user list from  https://jsonplaceholder.typicode.com/users
     - [ ] validate input username
     - [ ] nice to have : define common api response signature
@@ -25,3 +25,7 @@
 - came across destructuring assignment example ( https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment,http://exploringjs.com/es6/ch_destructuring.html)
 - trying to learn how vuex can be implemented in SPA project.  Trying to find similarities between react/redux.
 - decided to use flow for type checking;  It will be benefitical when implementing the to-do list model
+- eslintc : setting env flags ( node, es6 ) is needed in order to recognize 'require' or 'Promise'
+- Promise 
+    - testing : karma 
+    - eslint : env

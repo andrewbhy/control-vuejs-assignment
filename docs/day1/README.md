@@ -10,7 +10,7 @@
 - [x] Set up routing/components for the pages
 - [ ] Set up master page with top "nav" bar( layout/style )
     - [x] Create TopNav component
-        - [ ] set up html/css layout
+        - [ ] set up html/css layout 
         - [ ] add "Logged in user" widget component
 
     

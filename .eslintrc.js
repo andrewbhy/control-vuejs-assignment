@@ -8,6 +8,8 @@ module.exports = {
   },
   env: {
     browser: true,
+    node: true,
+    es6: true
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: 'eslint:recommended',
@@ -27,7 +29,9 @@ module.exports = {
     // disable indent check 
     'indent': 'off',
     // send flow errors to eslint
-   'flowtype-errors/show-errors': 2
+    'flowtype-errors/show-errors': 2,
+
+    'no-console':1 //severity : 0 = off, 1 = warn, 2 = error 
 
   }
 }

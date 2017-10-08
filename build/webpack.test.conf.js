@@ -5,6 +5,8 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 
+//let basePlugins = baseWebpackConfig.plugins ?   baseWebpackConfig.plugins  : []
+
 var webpackConfig = merge(baseWebpackConfig, {
   // use inline sourcemap for karma-sourcemap-loader
   module: {
@@ -21,6 +23,10 @@ var webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../config/test.env')
+    }),
+    new webpack.ProvidePlugin({
+      //Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise',
+      Promise: 'es6-promise-promise'
     })
   ]
 })
