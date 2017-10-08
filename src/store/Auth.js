@@ -1,41 +1,77 @@
 
 import User from '@/models/User'
+import * as API from '@/api'
+
+const logoutAction =({ commit, state, dispatch }, username) => {
+
+    commit('AUTH_LOGOUT');
+}
+
+const loginAction = ({ commit, state, dispatch }, username) => {
+  
+  commit('AUTH_LOGOUT');
+
+  let pr = new Promise((resolve, reject) => {
+
+    API.login(username).then(result => {
+
+      let { success, message, user } = result;
+
+      if ( success ) {
+        commit('AUTH_LOGIN', user) //this will automatically convert to Auth/AUTH_LOGIN in global scope
+      }
+      
+      resolve({ success, message })
+
+    }).catch(err => {
+
+      reject(err)
+    })
+
+
+
+  })
+
+  return pr;
+};
 
 
 export default {
-    namespaced: true,
+  namespaced: true,
 
-    state: {
-      loggedIn : false,
-      user : new User({ id : 0, name :"test user", username : "test@test.com"})
+  state: {
+    loggedIn: false,
+    user: new User({ id: 0, name: "test user", username: "test@test.com" })
+  },
+
+  actions: {
+    login: loginAction,
+
+    logout: logoutAction
+
+  },
+
+  mutations: {
+    AUTH_LOGIN(state, user) {
+    
+      state.loggedIn = true;
+      state.user = user;
     },
-
-    actions : {
-     
-
-    },
-
-    mutations : {
-      login ( state , user ) {
-        state.loggedIn = true;
-        state.user = user;
-      },
-      logout ( state ) {
-        state.loggedIn = false;
-        state.user =  new User();
-      }
-    },
-    getters : {
-      
-      getUserFullname: ( { user,isLoggedIn } ) => {
-       
-        let name = isLoggedIn && user && user.name ? user.name : "<not logged in>"
-        return name;
-      },
-
-      getIsLoggedIn : ( {isLoggedIn}) => {
-        return isLoggedIn || false;
-      }
-
+    AUTH_LOGOUT(state) {
+      state.loggedIn = false;
+      state.user = new User();
     }
+  },
+  getters: {
+
+    getUserFullname: ({ user, loggedIn }) => {
+      let name = loggedIn && user && user.name ? user.name : "<not logged in>"
+      return name;
+    },
+
+    getIsLoggedIn: ({ loggedIn }) => {
+      return loggedIn || false;
+    }
+
+  }
 };

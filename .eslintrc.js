@@ -31,7 +31,7 @@ module.exports = {
     // send flow errors to eslint
     'flowtype-errors/show-errors': 2,
 
-    'no-console':1 //severity : 0 = off, 1 = warn, 2 = error 
-
+    'no-console':1 ,//severity : 0 = off, 1 = warn, 2 = error 
+    'no-unused-vars':1 //configuring this as error was impeding dev
   }
 }
