@@ -26,6 +26,5 @@
 - trying to learn how vuex can be implemented in SPA project.  Trying to find similarities between react/redux.
 - decided to use flow for type checking;  It will be benefitical when implementing the to-do list model
 - eslintc : setting env flags ( node, es6 ) is needed in order to recognize 'require' or 'Promise'
-- Promise 
-    - testing : karma 
-    - eslint : env
+- karma+mocha+ES6-Promise+axios : wanted to use unit-testing to develop login api function, but I have been struggling trying to make this work.  I will have to wire the api call to ui and test there first then figure out how to set this up.
+  
