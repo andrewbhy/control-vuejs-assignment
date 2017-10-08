@@ -10,7 +10,7 @@
 
 <script>
 import './styles/lib.less'
-import TopNav from '@/components/TopNav.vue' // note that the extension .vue is needed unlike .js files
+import TopNav from '@/components/TopNav/TopNav.vue' // note that the extension .vue is needed unlike .js files
 
 export default {
   name: 'app',
