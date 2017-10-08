@@ -3,13 +3,14 @@
 
     <TopNav/>
     <div class="content-container">
+
       <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import './styles/lib.less'
+//import './styles/lib.less'
 import TopNav from '@/components/TopNav/TopNav.vue' // note that the extension .vue is needed unlike .js files
 
 export default {
@@ -20,7 +21,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style >
 
 .content-container {
   width : 80%;
