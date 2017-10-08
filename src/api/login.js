@@ -43,5 +43,5 @@ const login = ( username ) => {
     return returnPromise;
 }
 
-export default login
+export { login }
 

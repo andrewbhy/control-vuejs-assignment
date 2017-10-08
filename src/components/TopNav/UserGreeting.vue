@@ -1,7 +1,7 @@
 
 <template>
-    <!--<span v-if="isLoggedIn">welcome, {{fullname}}  </span>-->
-    <span>{{fullname}} </span>
+    <span v-if="isLoggedIn">welcome, {{fullname}}  </span>
+    <!--<span>{{fullname}} </span>-->
 
 </template>
 

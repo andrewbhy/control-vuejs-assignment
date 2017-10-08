@@ -1,14 +1,18 @@
 
 import User from '@/models/User'
-import * as API from '@/api'
+import { Auth as API } from '@/api'
 
-const logoutAction =({ commit, state, dispatch }, username) => {
 
-    commit('AUTH_LOGOUT');
+
+
+
+const logoutAction = ({ commit, state, dispatch }, username) => {
+
+  commit('AUTH_LOGOUT');
 }
 
 const loginAction = ({ commit, state, dispatch }, username) => {
-  
+
   commit('AUTH_LOGOUT');
 
   let pr = new Promise((resolve, reject) => {
@@ -17,10 +21,10 @@ const loginAction = ({ commit, state, dispatch }, username) => {
 
       let { success, message, user } = result;
 
-      if ( success ) {
+      if (success) {
         commit('AUTH_LOGIN', user) //this will automatically convert to Auth/AUTH_LOGIN in global scope
       }
-      
+
       resolve({ success, message })
 
     }).catch(err => {
@@ -35,25 +39,21 @@ const loginAction = ({ commit, state, dispatch }, username) => {
   return pr;
 };
 
-
 export default {
   namespaced: true,
 
   state: {
     loggedIn: false,
-    user: new User({ id: 0, name: "test user", username: "test@test.com" })
+    user: new User({ id: 0, name: "", username: "" })
   },
 
   actions: {
     login: loginAction,
-
     logout: logoutAction
-
   },
 
   mutations: {
     AUTH_LOGIN(state, user) {
-    
       state.loggedIn = true;
       state.user = user;
     },
@@ -71,6 +71,16 @@ export default {
 
     getIsLoggedIn: ({ loggedIn }) => {
       return loggedIn || false;
+    },
+
+    id: ({ user, loggedIn }) => {
+      if (!loggedIn || (!user && !user.id)) {
+        //do not return value unless current user is logged in
+        return null;
+      }
+      else {
+        return user.id;
+      }
     }
 
   }

@@ -1,6 +1,9 @@
 
 <template>
+    <!--
+    this makes clicking hard...
     <a v-if="isLoggedIn" @click="handleLogout" >Logout</a>
+    -->
 
     <!--
         when clicking logout button, it also clicked the login button when using href property
@@ -8,7 +11,9 @@
         <a v-else v-bind:href="url()">Login</a>
     -->
 
-    <a v-else @click="handleLogin"> Login</a>
+    <!-- this handles click event reliably, and is of better design ( separation of concern )-->
+    <li class="nav-btn nav-btn-alt" v-if="isLoggedIn" @click="handleLogout" ><a >Logout</a></li>
+    <li class="nav-btn nav-btn-alt" v-else @click="handleLogin"><a>Login</a></li>
 </template>
 
 <script>
@@ -48,5 +53,34 @@ export default {
 a { 
      color : white;
      text-decoration:none; 
+}
+
+
+
+
+.nav-btn {
+    box-sizing: border-box;
+    height: 33px;
+    margin-right: 10px;
+    padding: 10px 15px!important;
+    border-radius: 3px;
+    background: #3A98F3;
+    font-family: Lato, Helvetica, Arial, Lucida, sans-serif;
+    color: #fff !important;
+    line-height: normal!important;
+    font-size: 14px!important;
+    font-weight: 600;
+    border: 0;
+    transition: all 300ms;
+    cursor : pointer;
+}
+
+.nav-btn-alt {
+    border: 1px solid #5892ca;
+    background: transparent;
+    box-shadow: initial!important;
+}
+.nav-btn-alt:hover {
+    border : 1px solid white;
 }
 </style>
