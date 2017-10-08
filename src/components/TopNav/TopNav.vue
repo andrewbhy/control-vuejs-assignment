@@ -8,7 +8,9 @@
     <div class="top-nav-menu right">
         <section > 
             <ul class="right">
-                <li class="nav-btn"><LoginButton/></li>
+                <!--HTML attributes are case-insensitive, so when using non-string templates, camelCased prop names need to use their kebab-case (hyphen-delimited) equivalents -->
+                <li> <UserGreeting v-bind:is-logged-in="getIsLoggedIn" v-bind:fullname="getUserFullname" /> </li>
+                <li class="nav-btn"><LoginButton v-bind:is-logged-in="getIsLoggedIn"/></li>
             </ul>
         </section>
     </div>
@@ -19,13 +21,25 @@
 
 <script>
 //import '@/styles/lib.less'
+
+import {createNamespacedHelpers} from 'vuex'
+const { mapGetters } = createNamespacedHelpers('Auth');
+
 import Logo from '@/components/Logo.vue' // note that the extension .vue is needed unlike .js files
 import LoginButton from './LoginButton.vue'
-export default {
-  name: 'app',
+import UserGreeting from './UserGreeting.vue'
 
-  //components are defined at the top level; not inside data() function
-  components: { Logo , LoginButton}
+
+
+export default {
+    name: 'app',
+
+    //components are defined at the top level; not inside data() function
+    components: { Logo , LoginButton, UserGreeting },
+
+    computed : {
+         ...mapGetters(['getUserFullname','getIsLoggedIn']) 
+    }
 }
 </script>
 
@@ -43,6 +57,9 @@ export default {
 }
 .top-nav ul {
     list-style: none;
+}
+.top-nav li {
+    float : left;
 }
 .logo-container {
     position : absolute;

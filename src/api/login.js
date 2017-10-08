@@ -1,11 +1,11 @@
 
+//@flow
+
+export default ( username : string ) => {
+
+    
 
 
+}
 
 
-// export default ( username ) => {
-
-  
-
-//     return true;
-// }

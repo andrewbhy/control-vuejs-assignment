@@ -1,10 +1,18 @@
 
 <template>
-    <a href="/login">Login</a>
+    <a v-if="isLoggedIn" href="/logout">Logout</a>
+    <a v-else href="/login">Login</a>
 </template>
 
+<script>
+export default {
+
+     props : ['isLoggedIn']
+}
+</script>
+
 <style>
- a { 
+a { 
      color : white;
      text-decoration:none; 
 }

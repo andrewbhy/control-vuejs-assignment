@@ -1,10 +1,11 @@
 //@flow
-export class User {
+export default class User {
 
     id : number
     name : string
     username : string
     email : string
+
     constructor ( args  : ?any ){
 
         //user data has many other properties but we are only interested in the following for now
