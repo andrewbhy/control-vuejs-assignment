@@ -14,3 +14,7 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
+
+
+# flow-typed definitions
+flow-typed

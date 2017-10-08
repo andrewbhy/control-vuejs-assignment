@@ -13,7 +13,7 @@ module.exports = {
   extends: 'eslint:recommended',
   // required to lint *.vue files
   plugins: [
-    'html'
+    'html','flowtype-errors'
   ],
   // add your custom rules here
   'rules': {
@@ -25,7 +25,9 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
 
     // disable indent check 
-    "indent": "off"
+    'indent': 'off',
+    // send flow errors to eslint
+   'flowtype-errors/show-errors': 2
 
   }
 }
