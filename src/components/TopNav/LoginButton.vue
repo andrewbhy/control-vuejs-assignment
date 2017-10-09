@@ -12,8 +12,8 @@
     -->
 
     <!-- this handles click event reliably, and is of better design ( separation of concern )-->
-    <li class="nav-btn nav-btn-alt" v-if="isLoggedIn" @click="handleLogout" ><a >Logout</a></li>
-    <li class="nav-btn nav-btn-alt" v-else @click="handleLogin"><a>Login</a></li>
+    <div class="nav-btn nav-btn-alt" v-if="isLoggedIn" @click="handleLogout" ><a >Logout</a></div>
+    <div class="nav-btn nav-btn-alt" v-else @click="handleLogin"><a>Login</a></div>
 </template>
 
 <script>
@@ -60,7 +60,7 @@ a {
 
 .nav-btn {
     box-sizing: border-box;
-    height: 33px;
+    height: 38px;
     margin-right: 10px;
     padding: 10px 15px!important;
     border-radius: 3px;
