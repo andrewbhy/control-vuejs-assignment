@@ -32,7 +32,7 @@ import UserGreeting from './UserGreeting.vue'
 
 
 export default {
-    name: 'app',
+    name: 'topnav',
 
     //components are defined at the top level; not inside data() function
     components: { Logo , LoginButton, UserGreeting },

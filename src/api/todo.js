@@ -49,7 +49,7 @@ export const getToDoListForUser = (userId: number) : Promise<any> => {
     return new Promise((resolve: Function, reject:Function) => {
 
         axios.get(url, { params: { userId } }).then(response => {
-            debugger
+           
             resolve( { success : true, data: response.data})
 
 

@@ -73,7 +73,7 @@ export default {
       return loggedIn || false;
     },
 
-    id: ({ user, loggedIn }) => {
+    userId: ({ user, loggedIn }) => {
       if (!loggedIn || (!user && !user.id)) {
         //do not return value unless current user is logged in
         return null;

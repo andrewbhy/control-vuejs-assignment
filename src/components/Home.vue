@@ -5,6 +5,8 @@
 
     <div v-if="isToDoVisible()"> 
         <h1>{{getUserFullname}}'s To Do </h1>
+
+        <ToDoList v-bind:user-id="userId"/>
     </div>
 
     <div v-else>
@@ -17,15 +19,18 @@
 <script>
 import {createNamespacedHelpers} from 'vuex'
 const { mapGetters } = createNamespacedHelpers('Auth');
+
+import ToDoList from './ToDo/ToDoList.vue'
+
 export default {
     data() {
         return {
            
         }
     },
-
+    components : {ToDoList},
     computed : {
-         ...mapGetters(['getUserFullname','getIsLoggedIn']) 
+         ...mapGetters(['getUserFullname','getIsLoggedIn','userId']) 
     },
 
     methods : {
