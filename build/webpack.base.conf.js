@@ -1,6 +1,9 @@
 var path = require('path')
+var webpack = require('webpack')
+
 var utils = require('./utils')
 var config = require('../config')
+
 var vueLoaderConfig = require('./vue-loader.conf')
 
 function resolve (dir) {
@@ -25,6 +28,11 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  plugins : [
+    new webpack.ProvidePlugin({
+      Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise',
+    })
+  ],
   module: {
     rules: [
       {

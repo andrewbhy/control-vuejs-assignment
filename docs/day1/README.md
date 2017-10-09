@@ -1,24 +1,24 @@
 
 # Goals for Day 1 : Oct 5
 
-- [] Get familiar with essentials of Vue.js and the scaffolding
+- [ ] Get familiar with essentials of Vue.js and the scaffolding
     - [x] Using single file components
 - [x] Identify all the "pages" that are needed for the app
     - Login
     - ToDo ( Home ) - make the automatically redirect to login screen if the user is not logged in
     - Master Page ( App.vue )
 - [x] Set up routing/components for the pages
-- [] Set up master page with top "nav" bar( layout/style )
+- [ ] Set up master page with top "nav" bar( layout/style )
     - [x] Create TopNav component
-        - [] set up html/css layout
-        - [] add "Logged in user" widget component
+        - [ ] set up html/css layout 
+        - [ ] add "Logged in user" widget component
 
     
 
 # Nice to have
 
 - [x] use LESS ( https://tutorialzine.com/2015/07/learn-less-in-10-minutes-or-less )
-    - [] set up library of less variables : Right now, I cannot share css variables defined in lib.less file in vue components, even though I import the lib file.  For SASS, there seems to be sass-resource-loader plugin for this purpose. Need to find how to do ths with LESS
+    - [ ] set up library of less variables : Right now, I cannot share css variables defined in lib.less file in vue components, even though I import the lib file.  For SASS, there seems to be sass-resource-loader plugin for this purpose. Need to find how to do ths with LESS
 - [x] I really need syntax highlighiting for .vue files!!
 - [x] integrate ESlint with IDE ( VSCODE )
 - ESLint

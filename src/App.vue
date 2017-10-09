@@ -1,15 +1,17 @@
 <template>
   <div id="app">
 
-    <TopNav></TopNav>
-   
-    <router-view></router-view>
+    <TopNav/>
+    <div class="content-container">
+
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import './styles/lib.less'
-import TopNav from '@/components/TopNav.vue' // note that the extension .vue is needed unlike .js files
+//import './styles/lib.less'
+import TopNav from '@/components/TopNav/TopNav.vue' // note that the extension .vue is needed unlike .js files
 
 export default {
   name: 'app',
@@ -19,7 +21,13 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style >
+
+.content-container {
+  width : 80%;
+  margin : auto;
+}
+
 body {
   margin : 0px !important;
   padding : 0px !important;
