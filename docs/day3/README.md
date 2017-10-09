@@ -14,3 +14,9 @@
 - [ ] focus on username input box when login page is loaded
 - [ ] improve form validation & submition code
     - [ ] fix "double post" bug
+
+# What I Learned 
+
+- modal component. emit, slot ( just concept )
+    - couldn't use created or mount event to reset the state of the modal component whenver it is opened.  Had to reset on close/submit
+- used vue transition for the first time.  At this point it is unclear how css classes are generated.
