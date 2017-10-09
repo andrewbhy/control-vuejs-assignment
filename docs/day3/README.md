@@ -6,4 +6,8 @@
 # Goals
 
 - [ ] finish ToDo List
+    - [x] toggle completed status
+    - [ ] update title
+    - [ ] implement modal component for adding new todo item
 - [ ] focus on username input box when login page is loaded
+- [ ] add bootstrap ( https://github.com/bootstrap-vue/bootstrap-vue/issues/145 )

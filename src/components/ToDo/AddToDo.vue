@@ -1,30 +1,32 @@
 <template>
 <!-- template for the modal component -->
-  <transition name="modal">
+  <transition  v-if="showModal" name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
+            <form v-on:submit.prevent="handleSubmit">
+            
+            <div class="modal-header">
+                <h2>Add To Do </h2>
+            </div>
 
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
+            <div class="modal-body">
+                <span>Title</span><input v-model="title" @input="onTitleChange"/>
+                {{validationMessage}}
+            </div>
 
-          <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
-            </slot>
-          </div>
+            <div class="modal-footer">
+                <slot name="footer">
+                    <button class="btn btn-primary" > <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
+                        submit
+                    </button>
+                    <!-- don't want to submit on cancel now do we? -->
+                    <button type="button" class="btn btn-primary"  @click="handleCancel"> <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
+                        cancel
+                    </button>
+                </slot>
+            </div>
+            </form>
         </div>
       </div>
     </div>
@@ -33,10 +35,101 @@
 
 <script>
 
+import {createNamespacedHelpers} from 'vuex'
+const { mapGetters,mapActions } = createNamespacedHelpers('ToDo');
+
+const validate = ( { userId,title }) => {
+
+    let isValid = true;
+    let message = "";
+    
+    if( !userId || userId <= 0 ){
+        isValid = false;
+        message = "applciation error, userId is not found. "
+        //this is app error and not a user error; need to handle it differently
+    }
+
+    if ( !title || title.length  == 0 ){
+        isValid = false;
+        message = "Title cannot be empty";
+    }
+
+    return {
+        isValid, message
+    }
+
+}
 
 export default {
 
-    props : ["showModal"]
+    props : ["showModal","userId"],
+
+    data : function() {
+
+        return {
+            title : "",
+            validationMessage : ""
+        }
+    },
+
+  
+
+
+    methods : {
+
+        ...mapActions(["create"]),
+
+        setValidationMessage : function (msg) {
+            this.$data.validationMessage = msg || "";
+        },
+
+        resetProps: function(){
+            this.$data.title = ""; 
+            this.setValidationMessage("");
+        },
+
+        getProps : function() {
+            return { title : this.$data.title, userId : this.$props.userId }
+        },
+       
+        onTitleChange : function(e) {
+       
+            this.setValidationMessage("");
+
+            let { title, userId } = this.getProps()
+            let { isValid , message } = validate({userId,title})
+
+            this.setValidationMessage(message);
+
+        },
+        handleCancel : function(e) {
+            this.resetProps()
+            this.$emit('close')
+        },
+        handleSubmit : function(e) {
+            
+            this.setValidationMessage("");
+
+            let { title, userId } = this.getProps()
+
+            let payload = { userId,title };
+            let { isValid , message } = validate(payload)
+
+            if( isValid ){
+                this.create(payload).then( result => {
+                    this.$emit('close')
+                    this.resetProps()
+                }).catch( err => {
+                    //to-do : handle later
+                })
+            }
+            else {
+                this.setValidationMessage(message);
+            }
+
+        }
+    }
+
   
 }
 </script>
@@ -61,7 +154,8 @@ export default {
 }
 
 .modal-container {
-  width: 300px;
+  min-width: 300px;
+  width : 600px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;

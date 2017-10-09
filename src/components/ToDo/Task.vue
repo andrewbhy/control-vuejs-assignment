@@ -1,9 +1,13 @@
 <template>
+    <transition name="fade">
     <div :key="id" :class="{ completed : isCompleted }">
-        <span>{{id}}</span>
+        <!--<span>{{id}}</span>-->
         <input type="checkbox" id="checkbox" v-model="completed" @change="onCheckboxChange">
-        <span class="title">{{title}}</span>
+        <span class="title-container"><span class="title">{{title}}</span></span>
+
+      
     </div>
+    </transition>
    
 </template>
 <script>
@@ -45,10 +49,6 @@ export default {
                 title,
                 completed
             })
-            
-
-
-
         },
        
 
@@ -56,8 +56,19 @@ export default {
 }
 </script>
 <style>
-.completed .title{
-    text-decoration: line-through;
+.completed .title-container {
+    text-decoration: line-through; 
+ 
+  
 }
+.completed .title{
+    color : darkgray;
 
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0
+}
 </style>

@@ -4,9 +4,9 @@
   
 
     <div v-if="isToDoVisible()"> 
-        <h1>{{getUserFullname}}'s To Do </h1>
+   
 
-        <ToDoList v-bind:user-id="userId"/>
+        <ToDoList v-bind:user-id="userId" v-bind:user-full-name="getUserFullname "/>
     </div>
 
     <div v-else>
