@@ -4,16 +4,30 @@
         <div id="form-login" class="form-group">
             <div class="form-inner-content-container">
                 <h1>Login To View Or Add To-Dos</h1>
+                
+                
                 <form v-on:submit.prevent="onSubmit">
                     <!--submit.prevent should prevent reloading-->
 
                     <div class="login-input">
-                        <input class="form-control" v-model="username" @input="onInput"></input>
+
+                        <div class="input-group">
+                           
+                            <input name='username'
+                                :class="{'input': true, 'is-danger': errors.has('username') }" 
+                                v-validate="{ rules: { required: 'username',regex:  /^[a-zA-Z0-9._-]+$/} }" 
+                                v-model="username" @input="onInput"
+                            >
+                            </input>
+                            <i v-show="errors.has('username')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('username')" class="help is-danger">{{ errors.first('username') }}</span>
+                        </div>
+                        
+                   
                         <button class="">Login</button>
                     </div>
                   
 
-                    {{validationMessage}}
                     <div>
                         {{loginErrorMesage}}
                     </div>
