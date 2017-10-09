@@ -22,15 +22,22 @@ export default {
 </script>
 
 <style >
-
 .content-container {
-  width : 80%;
-  margin : auto;
+  width: 80%;
+  margin: auto;
 }
 
+html,
 body {
-  margin : 0px !important;
-  padding : 0px !important;
+  height: 100%;
+}
+
+
+
+body {
+  margin: 0px !important;
+  padding: 0px !important;
+
 
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -38,6 +45,6 @@ body {
 }
 
 #app {
-  top : 0px;
+  top: 0px;
 }
 </style>
