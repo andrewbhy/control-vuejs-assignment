@@ -13,7 +13,7 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "flow-generate-type": "flow-typed install",
-    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
+    "heroku-prebuild": "npm install express@4.16.2",
     "heroku-postbuild": "echo This runs after"
   },
   "dependencies": {
