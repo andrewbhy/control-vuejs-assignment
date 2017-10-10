@@ -1,6 +1,19 @@
 # control-frontend
 
-> front end showcase and a learning experience
+> front end showcase and a learning experience :
+> https://control-frontend.herokuapp.com/
+
+# How to run in dev settings
+
+```bash
+  npm install
+  npm run flow-generate-type 
+  npm run dev
+```
+
+# Flow-type giving trouble?
+
+created flow-typed branch with flow-typed included.  Try this instead
 
 # Minimum Requirements 
 
@@ -69,7 +82,7 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 
-# server published app on simple app server ( run this after build )
+# serve published app on simple express app server ( run this after build )
 npm run start
 
 # run unit tests
@@ -80,6 +93,9 @@ npm run e2e
 
 # run all tests
 npm test
+
+# generate flow-typed definitions from locally installe flow-bin/flow-type
+npm run flow-generate-type
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
