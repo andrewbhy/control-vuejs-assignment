@@ -15,7 +15,7 @@
     "flow-generate-type": "flow-typed install",
 
     "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
-    "heroku-postbuild": "echo This runs afterwards."
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "axios": "^0.16.2",
