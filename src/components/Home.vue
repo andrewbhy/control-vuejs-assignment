@@ -1,26 +1,22 @@
 
 <template>
 <div>
-  
-
     <div v-if="isToDoVisible()"> 
-   
-
-        <ToDoList v-bind:user-id="userId" v-bind:user-full-name="getUserFullname "/>
+        <ToDoList v-bind:user-id="userId" v-bind:user-full-name="getUserFullname"/>
     </div>
 
     <div v-else>
-        <h1>Please login to use Todo </h1>
+        <h1>Hello World </h1>
     </div>
-
 </div>
 </template>
 
 <script>
-import {createNamespacedHelpers} from 'vuex'
-const { mapGetters } = createNamespacedHelpers('Auth');
 
+import {createNamespacedHelpers} from 'vuex'
 import ToDoList from './ToDo/ToDoList.vue'
+
+const { mapGetters } = createNamespacedHelpers('Auth');
 
 export default {
     data() {
@@ -34,10 +30,7 @@ export default {
     },
 
     methods : {
-
-
          isToDoVisible : function() {
-       
             return this.getIsLoggedIn
          }
     }
