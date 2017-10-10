@@ -13,7 +13,7 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "flow-generate-type": "flow-typed install",
-    "postinstall": "npm run flow-generate-type"
+    "postinstall":  "[ \"$NODE_ENV\" != production ] && npm run flow-generate-type"
   },
   "dependencies": {
     "axios": "^0.16.2",
