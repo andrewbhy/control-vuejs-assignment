@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col">
-                <h1>To Dos</h1>
+                <h1>To-Dos</h1>
                 <ul>
                     <!--In 2.2.0+, when using v-for with a component, a key is now required.-->
                     <Task v-for="item in getIncompleteTaskList" v-bind:task="item"  :key="item.id"/>
