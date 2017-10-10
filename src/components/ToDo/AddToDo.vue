@@ -83,8 +83,9 @@ export default {
         }
     },
     created() {
+        //debounce on submit
         this.handleSubmit = debounce(this.handleSubmit,300,{leading:true})
-        this.$forceUpdate();
+        
     },
     mounted : function(){
         
