@@ -6,7 +6,9 @@
     </div>
 
     <div v-else style="margin-top:10px">
-        <h1>Simple To-Do App</h1>
+        <h1>Simple To-Do App </h1> 
+        <span>Version: {{version}}</span>
+        <hr/>
         <p>
             This is a simple To-Do app, developed with vue.js ( vuex for state management )
         </p>
@@ -34,9 +36,13 @@ export default {
            
         }
     },
+   
     components : {ToDoList},
     computed : {
-         ...mapGetters(['getUserFullname','getIsLoggedIn','userId']) 
+         ...mapGetters(['getUserFullname','getIsLoggedIn','userId']),
+         version : function() {
+             return process.env.VERSION || 'unknown'
+         }
     },
 
     methods : {
