@@ -1,5 +1,5 @@
 
-# Goals for Day 1 : Oct 5
+# Goals for Day 1
 
 - [ ] Get familiar with essentials of Vue.js and the scaffolding
     - [x] Using single file components
@@ -13,8 +13,6 @@
         - [ ] set up html/css layout 
         - [ ] add "Logged in user" widget component
 
-    
-
 # Nice to have
 
 - [x] use LESS ( https://tutorialzine.com/2015/07/learn-less-in-10-minutes-or-less )
@@ -25,6 +23,12 @@
     - [x] disable indent check in eslint
     - [x] change base from standard to recommended configuration
 
+# Long term goals ( so that I do not forget )
+
+- Set up deployment to ( heroku/github or anywhere that can be publically accessed )
+- Responsive layout ( nice to have )
+- unit/e2e testing 
+- undo/redo ( nice to have, probably should choose between testing or undo/redo )
 
 
 # Questions/Thoughts that comes to mind
@@ -35,12 +39,6 @@
 - First time using eslint where it is a dependency on build process; indent errors preventing build proved be an obstacle ( now resolved ).
 
 
-# Long term goals ( so that I do not forget )
-
-- Set up deployment to ( heroku/github or anywhere that can be publically accessed )
-- Responsive layout ( nice to have )
-- unit/e2e testing 
-- undo/redo ( nice to have, probably should choose between testing or undo/redo )
 
 
 # Retrospective 

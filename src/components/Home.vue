@@ -5,8 +5,18 @@
         <ToDoList v-bind:user-id="userId" v-bind:user-full-name="getUserFullname"/>
     </div>
 
-    <div v-else>
-        <h1>Hello World </h1>
+    <div v-else style="margin-top:10px">
+        <h1>Simple To-Do App</h1>
+        <p>
+            This is a simple To-Do app, developed with vue.js ( vuex for state management )
+        </p>
+
+        <strong>Please login to use the app</strong>
+
+        <p>
+            Authentication only requires username, and the list can be found here : 
+            <a style="color:blue"href="http://jsonplaceholder.typicode.com/users">users</a>
+        </p>
     </div>
 </div>
 </template>

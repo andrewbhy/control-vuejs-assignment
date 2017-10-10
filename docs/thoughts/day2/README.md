@@ -17,12 +17,19 @@
     - [x] Create component(s) with props
     - [x] Learn how to manage state in large and complex SPA ( https://vuejs.org/v2/guide/state-management.html, https://css-tricks.com/intro-to-vue-4-vuex/ ,http://pksunkara.com/posts/complex-vuejs-app-structure/)
     - [x] Read tutorials on Building Large Scale App with vue.js ( https://medium.com/@thomasmarciniak/building-large-scale-apps-with-vuejs-2-part-1-structure-c27ae42dacd0 )
-    
+    - Actions vs Mutations & dispatch vs commit
+        - actions can be async, whereas mutations are synchronous
+        - dipatch triggers action vs commit triggers mutation
+        - compared to react/redux, actions are practically identical and mutations remind me of reducers ( except state being immutable in react/redux )
 - [x] implement not found 404 page ( helped debugging routing issue ) 
 
-# Thoughts & Findings & Gotchas
+
+# Gotchas
 
 - Vue-Router was not loading routes ( ex. /login ); Had to enable history mode
+
+# Thoughts
+
 - Decided to introduce state management ( vuex ) early, so that I can benefit from it when constructing the login button widget
 - came across destructuring assignment example ( https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment,http://exploringjs.com/es6/ch_destructuring.html)
 - I am trying to learn how vuex works and trying to understand by identifying similarities with react/redux.  
@@ -30,10 +37,6 @@
 - eslintc : setting env flags ( node, es6 ) is needed in order to recognize 'require' or 'Promise'
 - karma+mocha+ES6-Promise+axios : wanted to use unit-testing to develop login api function, but I have been struggling trying to make this work.  I will have to wire the api call to ui and test there first then figure out how to set this up.
 - vue-router go api didn't work, probably because history mode is on.  Had to use push instead
-- Actions vs Mutations & dispatch vs commit
-    - actions can be async, whereas mutations are synchronous
-    - dipatch triggers action vs commit triggers mutation
-    - compared to react/redux, actions are practically identical and mutations remind me of reducers ( except state being immutable in react/redux )
 - Binding actions and states are simpler than the "connect" function in redux
 
 

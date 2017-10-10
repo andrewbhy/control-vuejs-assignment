@@ -16,6 +16,10 @@ const findTaskFromState = (state, { userId, id }) => {
     return { index: arrayIndex, item }
 }
 
+const initialState = {
+    maxId : -1,
+    taskList: []
+}
 
 let actions = {
 
@@ -81,6 +85,15 @@ let actions = {
 }
 
 let mutations = {
+    AUTH_LOGOUT : (state) =>{
+       
+        //state.maxId = initialState.maxId;
+        //state.taskList = initialState.taskList;
+        state = Object.assign({},initialState)
+
+        state.taskList = [];
+        debugger
+    },
     TODO_SETMAXID : (state,data) =>{
         state.maxId = data;
     },
@@ -139,10 +152,7 @@ let getters = {
 export default {
     namespaced: true,
 
-    state: {
-        maxId : -1,
-        taskList: []
-    },
+    state:  Object.assign({},initialState),
 
     actions,
     mutations,

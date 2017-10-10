@@ -5,13 +5,12 @@
             <div class="modal-wrapper">
                 <div class="modal-container">
                     <form v-on:submit.prevent="handleSubmit">
-
                         <div class="modal-header">
                             <h2>Add To Do </h2>
                         </div>
 
                         <div class="modal-body">
-                            <span>Title</span>
+                            <span>To-Do.</span>
                             <input name='title' v-model="title" v-validate:title="titleValidationRule" :class="{ 'title-input':true,  'input': true, 'is-danger': errors.has('title')}" @input="onTitleChange" />
                             <i v-show="errors.has('title')" class="fa fa-warning"></i>
                             <span v-show="errors.has('title')" class="help is-danger">{{ errors.first('title') }}</span>
@@ -22,16 +21,16 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
-                                        <button class="btn btn-primary btn-block ">
-                                            <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
-                                            submit
-                                        </button>
-                                    </div class="col">
-                                    <div class="col">
                                         <!-- don't want to submit on cancel now do we? -->
                                         <button type="button" class="btn btn-secondary btn-block col" @click="handleCancel">
                                             <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
                                             cancel
+                                        </button>
+                                    </div class="col">
+                                    <div class="col">
+                                        <button class="btn btn-primary btn-block ">
+                                            <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
+                                            submit
                                         </button>
                                     </div class="col">
                                 </div>
@@ -127,7 +126,7 @@ export default {
             try{
 
          
-            this.$validator.validate("title", title).then(valid => {
+                this.$validator.validate("title", title).then(valid => {
 
                 if (valid) {
                     this.create(payload).then(result => {

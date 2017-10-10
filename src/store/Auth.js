@@ -3,17 +3,24 @@ import User from '@/models/User'
 import { Auth as API } from '@/api'
 
 
+const commitLogout = (commit) => {
+  commit('AUTH_LOGOUT', null);
+  commit('ToDo/AUTH_LOGOUT', null, { root: true });
 
-
+}
 
 const logoutAction = ({ commit, state, dispatch }, username) => {
 
-  commit('AUTH_LOGOUT');
+  commitLogout(commit)
+
+
+
+
 }
 
 const loginAction = ({ commit, state, dispatch }, username) => {
 
-  commit('AUTH_LOGOUT');
+  commitLogout(commit)
 
   let pr = new Promise((resolve, reject) => {
 
