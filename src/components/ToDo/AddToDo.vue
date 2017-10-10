@@ -64,10 +64,10 @@ let validationMessageDictionary = {
         }
     }
 }
-let validator = new Validator({
-    title: titleValidationRule
-})
-validator.updateDictionary(validationMessageDictionary);
+// let validator = new Validator({
+//     title: titleValidationRule
+// })
+//validator.updateDictionary(validationMessageDictionary);
 
 const { mapGetters, mapActions } = createNamespacedHelpers('ToDo');
 
@@ -84,7 +84,7 @@ export default {
         }
     },
     created() {
-        this.handleSubmit = debounce(this.handleSubmit,1000,{leading:true})
+        this.handleSubmit = debounce(this.handleSubmit,300,{leading:true})
     },
     mounted : function(){
         
@@ -121,13 +121,12 @@ export default {
         handleSubmit: function(e) {
       
             this.setValidationMessage("");
-
             let { title, userId } = this.getProps();
-
-          
-
             let payload = { userId, title };
 
+            try{
+
+         
             this.$validator.validate("title", title).then(valid => {
 
                 if (valid) {
@@ -143,7 +142,14 @@ export default {
                     //to-do : find a way to handle errors
                     this.setValidationMessage("Add to-do failed");
                 }
-            });
+            })
+
+            }
+            catch(err){
+                // vee-validator throws error when submitting multiple times in very short time ( double post )
+                // [vee-validate] Validating a non-existant field: "title". Use "attach()" first.
+                // To-Do : investigate and fix the error
+            }
         },
 
        

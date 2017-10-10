@@ -14,8 +14,6 @@ const findTaskFromState = (state, { userId, id }) => {
     })
 
     return { index: arrayIndex, item }
-
-
 }
 
 
@@ -24,7 +22,10 @@ let actions = {
     load: ({ commit }, userId) => {
 
         return API.ToDo.getToDoListForUser(userId).then((result) => {
-            commit("TODO_LOAD", result.data)
+            API.ToDo.getMaxId().then( result2=>{
+                commit("TODO_SETMAXID", result2.data)
+                commit("TODO_LOAD", result.data)
+            })
         })
 
     },
@@ -46,25 +47,21 @@ let actions = {
 
     create: ({ commit, state }, taskPayload) => {
 
-        let {taskList} = state;
-        let maxId = 1;
-        taskList.forEach(item => {
-            if (item && item.id && maxId < item.id) {
-                maxId = item.id;
-            }
-        })
+        let {taskList,maxId} = state;
+        let newTask = new Task( Object.assign( { id : maxId + 1}, taskPayload) );//api doesn't generate new record. assigning new id from store instead
 
-        let newTask = new Task(taskPayload)
-        return API.ToDo.create(newTask,maxId).then(result => {
+        //optimistic
+        commit("TODO_ADD", { task: newTask });
+
+      
+
+        return API.ToDo.create(newTask,maxId+1).then(result => {
 
             return new Promise((resolve, reject) => {
 
                 let { success, message, data } = result;
 
                 if (success) {
-           
-                    commit("TODO_ADD", { task: data });
-
                     resolve({success})
                 }
                 else{
@@ -73,6 +70,8 @@ let actions = {
 
             })
 
+        }).catch((err)=>{
+            commit("TODO_ADD_CANCEL", newTask.id ); //remove from store; need testing
         })
 
 
@@ -82,19 +81,37 @@ let actions = {
 }
 
 let mutations = {
-
+    TODO_SETMAXID : (state,data) =>{
+        state.maxId = data;
+    },
     TODO_LOAD: (state, data) => {
-
         state.taskList = data || [];
-
     },
     TODO_ADD: (state, payload) => {
 
         let { taskList } = state;
         let { task } = payload;
-   
+        state.maxId++;
         state.taskList = [...taskList, task]; // append at end
     },
+    TODO_ADD_CANCEL: (state,id) => {
+        
+        let { taskList } = state;
+
+        let removeIndex = taskList.findIndex( (item)=>{
+            return item.id === id
+        })
+
+        if(removeIndex >= 0){
+            state.maxId--;
+            state.taskList = [
+                ...taskList.slice(0, removeIndex),
+                ...taskList.slice(removeIndex + 1)
+            ]
+        }
+
+    },
+
     TODO_UPDATE: (state, payload) => {
 
 
@@ -123,9 +140,8 @@ export default {
     namespaced: true,
 
     state: {
-
+        maxId : -1,
         taskList: []
-
     },
 
     actions,

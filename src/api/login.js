@@ -17,10 +17,7 @@ const login = ( username ) => {
                 let count = ( data || [] ).length;
 
                 if ( count == 1 ) {
-
                     let user =  new User( data[0] );
-                    
-
                     resolve( { success : true , message : "ok", user})
                 }
                 else if( count == 0 ){

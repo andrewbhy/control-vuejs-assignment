@@ -139,8 +139,6 @@ export default {
     updated:function(){ console.log("ToDoList control updated")},
     beforeDestroy:function(){ 
         console.log("ToDoList control beforeDestroy")
-
-       
     },
     destroyed:function(){ console.log("ToDoList control destroyed")}
 }

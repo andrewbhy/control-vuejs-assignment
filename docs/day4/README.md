@@ -2,10 +2,13 @@
 
 # Goals
 
-- [ ] Improve form validation/submit
-- [ ] Update all components to adhere to the wireframe ( html/css )
+- [x] Improve form validation/submit
+- [x] Update all components to adhere to the wireframe ( html/css )
 - [ ] rewrite README files, and do a little write up
 - [ ] submit by end of the day
+
+# Gotcha
+- flow-typed 2.2.0 has errors on windows machine and had to downgrade
 
 # Nice to Have 
 

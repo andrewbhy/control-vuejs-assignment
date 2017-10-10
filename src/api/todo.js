@@ -1,65 +1,46 @@
 //@flow
 import axios from 'axios'
+import type { AxiosXHRConfigBase } from 'axios'
+
 import querystring from 'querystring'
+//$FlowFixMe
 import Task from '../models/Task'
+
+
 
 const url: string = 'http://jsonplaceholder.typicode.com/todos';
 
-export const create = (task: Task, maxId : number): Promise<any> => {
-    //the json API doesn't actually create new records, so getToDoList call always returns the default list;
-    //this caused incorrect id assignment ( always resolved to 201)
-    //as a workaround, now I am getting the maxId from the state and passing it in, until I find a solution
+export const create = (task: Task): Promise<any> => {
+
 
 
     if (!task.validate()) {
         return Promise.reject({ success: false, message: "invalid input" })
     }
-    if (task.id >= 1) {
-        //treat positive id as already existing item
-        return Promise.reject({ success: false, message: "task is already generated at the server" })
-    }
-
-    //let maxId = 0; // start from 0
 
     return getToDoList().then(results => {
 
-        /*
-        let { data } = results;
-        data = data || [];
+        return axios.post(url, querystring.stringify(task)).then(response => {
 
-        //json is sorted by id, but decided not to rely on it
-        data.forEach(item => {
-            if (item && item.id && maxId < item.id) {
-                maxId = item.id;
-            }
-        })
-        */
-        //id resolution mock : this should be server api's job. 
-        maxId++;
-        task.setId(maxId); 
-
-  
-        return axios.post(url, querystring.stringify(task)).then( response =>{
-
-            return new Promise ( (resolve, reject ) => {
-                if ( response.status === 201 ){
+            return new Promise((resolve, reject) => {
+                if (response.status === 201) {
                     //created
 
-                    resolve ( {
-                        success : true,
-                        message : response.statusText,
-                        data : response.data
+                    resolve({
+                        success: true,
+                        message: response.statusText,
+                        data: response.data
                     })
                 }
-                else{
-                    reject ( {
-                        success : false,
-                        message : response.statusText,
-                        data : null
+                else {
+                    reject({
+                        success: false,
+                        message: response.statusText,
+                        data: null
                     })
                 }
             });
-           
+
         })
 
     })
@@ -70,11 +51,12 @@ export const create = (task: Task, maxId : number): Promise<any> => {
 
 }
 
-export const getToDoList = (params: ?any): Promise<any> => {
+export const getToDoList = (params: ?Object): Promise<any> => {
 
     return new Promise((resolve: Function, reject: Function) => {
 
-        axios.get(url, { params } ).then(response => {
+        //$FlowFixMe
+        axios.get(url, { params }).then(response => {
 
             resolve({ success: true, data: response.data })
 
@@ -89,20 +71,39 @@ export const getToDoList = (params: ?any): Promise<any> => {
 }
 
 export const getToDoListForUser = (userId: number): Promise<any> => {
+    return getToDoList({ userId });
+}
+
+export const getMaxId = (): Promise<any> => {
 
     /*
-    return new Promise((resolve: Function, reject: Function) => {
+        taskList.forEach(item => {
+            if (item && item.id && maxId < item.id) {
+                maxId = item.id;
+            }
+        })
 
-        axios.get(url, { params: { userId } }).then(response => {
+    */
+    return getToDoList().then((response) => {
 
-            resolve({ success: true, data: response.data })
+        return new Promise((resolve, reject) => {
+            if (response.success) {
 
-
-        }).catch((err: any) => {
-
-            reject({ success: false, err })
+                let taskList = response.data;
+                let maxId = 0;
+                taskList.forEach(item => {
+                    if (item && item.id && maxId < item.id) {
+                        maxId = item.id;
+                    }
+                })
+                resolve({ sucess : response.success, data: maxId})
+            }
+            else {
+                reject(response)
+            }
         })
     })
-    */
-    return getToDoList ( { userId});
+
+
+    //return new Promise( (resolve,reject)=>{ resolve({ success : true, data : 200 }) } );
 }
