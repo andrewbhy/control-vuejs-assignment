@@ -22,7 +22,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
-                                        <button type="button" class="btn btn-primary btn-block ">
+                                        <button class="btn btn-primary btn-block ">
                                             <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
                                             submit
                                         </button>
@@ -48,7 +48,7 @@
 
 import { Validator } from 'vee-validate';
 import { createNamespacedHelpers } from 'vuex'
-
+const debounce = require('lodash/debounce')
 const titleMaxLength = 60;
 const titleMinLength = 1
 const titleValidationRule = `required|max:${titleMaxLength}`
@@ -83,14 +83,18 @@ export default {
             validationMessage: ""
         }
     },
+    created() {
+        this.handleSubmit = debounce(this.handleSubmit,1000,{leading:true})
+    },
+    mounted : function(){
+        
 
+    },
     computed: {
         titleValidationRule() {
             return titleValidationRule
         }
     },
-
-
     methods: {
 
         ...mapActions(["create"]),
@@ -115,10 +119,13 @@ export default {
             this.$emit('close')
         },
         handleSubmit: function(e) {
-
+      
             this.setValidationMessage("");
 
-            let { title, userId } = this.getProps()
+            let { title, userId } = this.getProps();
+
+          
+
             let payload = { userId, title };
 
             this.$validator.validate("title", title).then(valid => {
@@ -137,7 +144,9 @@ export default {
                     this.setValidationMessage("Add to-do failed");
                 }
             });
-        }
+        },
+
+       
     }
 
 
