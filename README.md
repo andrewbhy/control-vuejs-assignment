@@ -52,9 +52,12 @@ created flow-typed branch with flow-typed included.  Try this instead
 
 # Issues
 
-- [Highest] When logging in as different user after logging out, to-do list from the previous sessions shows up.
-    - State is being cleared on logout, biggest suspect is the  vue <transition> storing image of previous screen
-    - Another suspect is that state update does not trigger the component to re-render
+- [fixed] When logging in as different user after logging out, to-do list from the previous sessions shows up.
+    - State is being cleared on logout and the computed cache should clear.  Component is destroyed aswell. Possible guesses :
+        - computed properties are cached as doesn't get cleared even when state is cleared on logout
+        - ~~is the vue <transition> storing image of previous screen? Need to understand how transition works.~~
+        - Another suspect is that state update does not trigger the component to re-render
+    - State was not cleared properly; 
 - Add To-Do item modal control does not autofocus on the input.
 
 # Things to do

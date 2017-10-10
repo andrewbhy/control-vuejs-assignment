@@ -86,11 +86,15 @@ let actions = {
 
 let mutations = {
     AUTH_LOGOUT : (state) =>{
-       
+      
+        //attemp 1 : didn't work
         //state.maxId = initialState.maxId;
         //state.taskList = initialState.taskList;
-        state = Object.assign({},initialState)
 
+        //attemp 2 : didn't clear the actual state when examined in vue devtool
+        //state = Object.assign({},initialState)  
+
+        state.maxId = 0;
         state.taskList = [];
     },
     TODO_SETMAXID : (state,data) =>{
