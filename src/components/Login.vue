@@ -1,7 +1,7 @@
 <template>
     <div class="vertical-center">
 
-        <div id="form-login" class="form-group">
+        <div id="form-login" class="form-group ">
             <div class="form-inner-content-container">
                 <h1>Login To View Or Add To-Dos</h1>
 
@@ -13,10 +13,11 @@
                         <div class="username-input-group">
 
                             <div>
-                                <input name='username' :class="{'input': true, 'is-danger': errors.has('username') }" v-validate:username="usernameValidationRule" v-model="username" @input="onInput">
+                                <input autofocus name='username' :class="{'input': true, 'is-danger': errors.has('username') }" v-validate:username="usernameValidationRule" v-model="username" @input="onInput">
                                 </input>
-                                <button class="">Login</button>
+                               
                             </div>
+                            <button class="btn btn-primary btn-block" style="position:relative;">Login</button>
                             <i v-show="errors.has('username')" class="fa fa-warning"></i>
                             <span v-show="errors.has('username')" class="help is-danger">{{ errors.first('username') }}</span>
                         </div>
@@ -57,7 +58,7 @@ let validationMessageDictionary = {
                 required: 'Username is empty.',
                 regex: 'username must be alphanumeric (letters a-z,A-Z, numbers 0-9) and cannot contain spaces.',
                 max: `username cannot be longer than ${usernameMaxLength} characters.`,
-                min: `username must be longer than ${usernameMinLength} characters.`
+                min: `username must be at least ${usernameMinLength} characters long.`
             }
         }
     }
@@ -65,7 +66,7 @@ let validationMessageDictionary = {
 
 
 let validator = new Validator({
-    username: `required|regex:/^[a-zA-Z0-9._-]+$/|max:{${usernameMaxLength}}|min:{${usernameMinLength}}`
+    username: usernameValidationRule
 })
 
 validator.updateDictionary(validationMessageDictionary);
@@ -73,7 +74,6 @@ validator.updateDictionary(validationMessageDictionary);
 export default {
 
     data: function() {
-
         return {
             username: null,
             valid: true,
@@ -83,8 +83,6 @@ export default {
     },
 
     created: function() {
-
-
 
     },
     computed: {
@@ -98,7 +96,6 @@ export default {
         ...mapActions(['login']),
 
         setLoginErrorMessage: function(msg) {
-
             this.$data.loginErrorMesage = msg;
         },
 
@@ -158,7 +155,16 @@ export default {
 }
 
 .login-container {
+    margin: auto;
     margin-top: 15%;
+    width : 60%;
+    position: relative;
+    text-align: center;
+}
+.login-container input{
+    width:100%;
+    margin-bottom:10px;
+
 }
 
 .username-input-group {
@@ -167,24 +173,37 @@ export default {
 }
 
 #form-login {
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    
     align-content: center;
     background-color: transparent;
+    background-color: #f1f1f1;
+    
+    /*
     border-style: solid;
     border-width: 1px;
     border-radius: 10px;
-
+    */
     margin: auto;
     position: relative;
 
-    top: -100px;
-
-
     min-width: 200px;
-    width: 80%;
+    width: 50%;
 
     min-height: 200px;
-    height: 60%;
+    height: 50%;
 
     padding: 40px;
 }
+
+
+
+.login-btn {
+
+    height: 36px;
+ 
+    user-select: none;
+
+}
+
 </style>

@@ -5,7 +5,7 @@
         <div style="overflow:hidden;padding-top:10px;">
             <!--overflow hidden contains the float and gives them height-->
             <div style="float:left"><span> {{userFullName}}'s To Do </span></div>
-            <div style="float:right"> <button  class="btn btn-primary"@click="showAddMenu = !showAddMenu">Add</button></div>
+            <div style="float:right"> <button  class="btn btn-primary btn-block" style="width:100px;padding:5px;margin:1px;" @click="showAddMenu = !showAddMenu">Add</button></div>
         </div>
      
     </div>
