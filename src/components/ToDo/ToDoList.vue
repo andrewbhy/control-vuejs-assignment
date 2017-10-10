@@ -5,7 +5,7 @@
         <div style="overflow:hidden;padding-top:10px;">
             <!--overflow hidden contains the float and gives them height-->
             <div style="float:left"><span> {{userFullName}}'s To Do </span></div>
-            <div style="float:right"> <button  class="btn btn-primary"@click="showAddMenu = !showAddMenu">Add</button></div>
+            <div style="float:right"> <button  class="btn btn-primary btn-block" style="width:100px;padding:5px;margin:1px;" @click="showAddMenu = !showAddMenu">Add</button></div>
         </div>
      
     </div>
@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col">
-                <h1>To Dos</h1>
+                <h1>To-Dos</h1>
                 <ul>
                     <!--In 2.2.0+, when using v-for with a component, a key is now required.-->
                     <Task v-for="item in getIncompleteTaskList" v-bind:task="item"  :key="item.id"/>
@@ -139,8 +139,6 @@ export default {
     updated:function(){ console.log("ToDoList control updated")},
     beforeDestroy:function(){ 
         console.log("ToDoList control beforeDestroy")
-
-       
     },
     destroyed:function(){ console.log("ToDoList control destroyed")}
 }

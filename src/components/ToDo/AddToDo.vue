@@ -1,182 +1,209 @@
 <template>
-<!-- template for the modal component -->
-  <transition  v-if="showModal" name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-            <form v-on:submit.prevent="handleSubmit">
-            
-            <div class="modal-header">
-                <h2>Add To Do </h2>
-            </div>
+    <!-- template for the modal component -->
+    <transition v-if="showModal" name="modal">
+        <div class="modal-mask">
+            <div class="modal-wrapper">
+                <div class="modal-container">
+                    <form v-on:submit.prevent="handleSubmit">
 
-            <div class="modal-body">
-                <span>Title</span><input v-model="title" @input="onTitleChange"/>
-                {{validationMessage}}
-            </div>
+                        <div class="modal-header">
+                            <h2>Add To Do </h2>
+                        </div>
 
-            <div class="modal-footer">
-                <slot name="footer">
-                    <button class="btn btn-primary" > <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
-                        submit
-                    </button>
-                    <!-- don't want to submit on cancel now do we? -->
-                    <button type="button" class="btn btn-primary"  @click="handleCancel"> <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
-                        cancel
-                    </button>
-                </slot>
+                        <div class="modal-body">
+                            <span>Title</span>
+                            <input name='title' v-model="title" v-validate:title="titleValidationRule" :class="{ 'title-input':true,  'input': true, 'is-danger': errors.has('title')}" @input="onTitleChange" />
+                            <i v-show="errors.has('title')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('title')" class="help is-danger">{{ errors.first('title') }}</span>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-primary btn-block ">
+                                            <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
+                                            submit
+                                        </button>
+                                    </div class="col">
+                                    <div class="col">
+                                        <!-- don't want to submit on cancel now do we? -->
+                                        <button type="button" class="btn btn-secondary btn-block col" @click="handleCancel">
+                                            <!--child sbould not modify parent's data/prop. emit close event so that parent component can properly handle it-->
+                                            cancel
+                                        </button>
+                                    </div class="col">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            </form>
         </div>
-      </div>
-    </div>
-  </transition>
+    </transition>
 </template>
 
 <script>
 
-import {createNamespacedHelpers} from 'vuex'
-const { mapGetters,mapActions } = createNamespacedHelpers('ToDo');
+import { Validator } from 'vee-validate';
+import { createNamespacedHelpers } from 'vuex'
+const debounce = require('lodash/debounce')
+const titleMaxLength = 60;
+const titleMinLength = 1
+const titleValidationRule = `required|max:${titleMaxLength}`
+let validationMessageDictionary = {
 
-const validate = ( { userId,title }) => {
-
-    let isValid = true;
-    let message = "";
-    
-    if( !userId || userId <= 0 ){
-        isValid = false;
-        message = "applciation error, userId is not found. "
-        //this is app error and not a user error; need to handle it differently
+    en: {
+        custom: {
+            title: {
+                required: 'Title cannot be empty.',
+                max: `Title cannot be longer than ${titleMaxLength} characters.`,
+                //min: `title must be at least ${titleMinLength} characters long.`
+            }
+        }
     }
-
-    if ( !title || title.length  == 0 ){
-        isValid = false;
-        message = "Title cannot be empty";
-    }
-
-    return {
-        isValid, message
-    }
-
 }
+// let validator = new Validator({
+//     title: titleValidationRule
+// })
+//validator.updateDictionary(validationMessageDictionary);
+
+const { mapGetters, mapActions } = createNamespacedHelpers('ToDo');
+
+
 
 export default {
 
-    props : ["showModal","userId"],
+    props: ["showModal", "userId"],
 
-    data : function() {
-
+    data: function() {
         return {
-            title : "",
-            validationMessage : ""
+            title: "",
+            validationMessage: ""
         }
     },
+    created() {
+        this.handleSubmit = debounce(this.handleSubmit,300,{leading:true})
+    },
+    mounted : function(){
+        
 
-  
-
-
-    methods : {
+    },
+    computed: {
+        titleValidationRule() {
+            return titleValidationRule
+        }
+    },
+    methods: {
 
         ...mapActions(["create"]),
 
-        setValidationMessage : function (msg) {
+        setValidationMessage: function(msg) {
             this.$data.validationMessage = msg || "";
         },
 
-        resetProps: function(){
-            this.$data.title = ""; 
+        resetProps: function() {
+            this.$data.title = "";
             this.setValidationMessage("");
         },
 
-        getProps : function() {
-            return { title : this.$data.title, userId : this.$props.userId }
+        getProps: function() {
+            return { title: this.$data.title, userId: this.$props.userId }
         },
-       
-        onTitleChange : function(e) {
-       
-            this.setValidationMessage("");
 
-            let { title, userId } = this.getProps()
-            let { isValid , message } = validate({userId,title})
-
-            this.setValidationMessage(message);
-
+        onTitleChange: function(e) {
         },
-        handleCancel : function(e) {
+        handleCancel: function(e) {
             this.resetProps()
             this.$emit('close')
         },
-        handleSubmit : function(e) {
-            
+        handleSubmit: function(e) {
+      
             this.setValidationMessage("");
+            let { title, userId } = this.getProps();
+            let payload = { userId, title };
 
-            let { title, userId } = this.getProps()
+            try{
 
-            let payload = { userId,title };
-            let { isValid , message } = validate(payload)
+         
+            this.$validator.validate("title", title).then(valid => {
 
-            if( isValid ){
-                this.create(payload).then( result => {
-                    this.$emit('close')
-                    this.resetProps()
-                }).catch( err => {
-                    //to-do : handle later
-                })
+                if (valid) {
+                    this.create(payload).then(result => {
+                        this.$emit('close')
+                        this.resetProps()
+                    }).catch(err => {
+                        //to-do : handle later
+                        console.error(err)
+                    })
+                }
+                else {
+                    //to-do : find a way to handle errors
+                    this.setValidationMessage("Add to-do failed");
+                }
+            })
+
             }
-            else {
-                this.setValidationMessage(message);
+            catch(err){
+                // vee-validator throws error when submitting multiple times in very short time ( double post )
+                // [vee-validate] Validating a non-existant field: "title". Use "attach()" first.
+                // To-Do : investigate and fix the error
             }
+        },
 
-        }
+       
     }
 
-  
+
 }
 </script>
 
 
 <style>
 .modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-  display: table;
-  transition: opacity .3s ease;
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
 }
 
 .modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .modal-container {
-  min-width: 300px;
-  width : 600px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
+    min-width: 300px;
+    width: 600px;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 .modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
+    margin-top: 0;
+    color: #42b983;
 }
 
 .modal-body {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
 .modal-default-button {
-  float: right;
+    float: right;
 }
+
+
 
 /*
  * The following styles are auto-applied to elements with
@@ -188,16 +215,20 @@ export default {
  */
 
 .modal-enter {
-  opacity: 0;
+    opacity: 0;
 }
 
 .modal-leave-active {
-  opacity: 0;
+    opacity: 0;
 }
 
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.title-input {
+    width: 100%;
 }
 </style>
