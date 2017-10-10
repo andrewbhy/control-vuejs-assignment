@@ -8,7 +8,7 @@ import Task from '../models/Task'
 
 
 
-const url: string = 'http://jsonplaceholder.typicode.com/todos';
+const url: string = 'https://jsonplaceholder.typicode.com/todos';
 
 export const create = (task: Task): Promise<any> => {
 

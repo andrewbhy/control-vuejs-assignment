@@ -10,7 +10,7 @@ const login = ( username ) => {
 
     let returnPromise = new Promise( (resolve,reject)=> {
         try{
-            axios.get(`http://jsonplaceholder.typicode.com/users`,{ params: { username} }).then(response => {
+            axios.get(`https://jsonplaceholder.typicode.com/users`,{ params: { username} }).then(response => {
                 // JSON responses are automatically parsed.
                 // if status is not 200, it should be handled in catch block
                 let { status , data } = response;
