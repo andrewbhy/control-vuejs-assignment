@@ -34,8 +34,9 @@ Gruntfile.js
 .flowconfig
 .documentup.json
 .yarn-metadata.json
-.*.yml
-*.yml
+# these are needed for build (/node_modules/svgo/lib/svgo/../../.svgo.yml )
+# .*.yml
+# *.yml
 
 # misc
 *.gz

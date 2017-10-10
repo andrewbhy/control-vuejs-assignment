@@ -92,7 +92,6 @@ let mutations = {
         state = Object.assign({},initialState)
 
         state.taskList = [];
-        debugger
     },
     TODO_SETMAXID : (state,data) =>{
         state.maxId = data;
