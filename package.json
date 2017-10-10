@@ -12,7 +12,10 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "flow-generate-type": "flow-typed install"
+    "flow-generate-type": "flow-typed install",
+
+    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
+    "heroku-postbuild": "echo This runs afterwards."
   },
   "dependencies": {
     "axios": "^0.16.2",
