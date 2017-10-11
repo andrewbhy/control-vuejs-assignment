@@ -5,13 +5,27 @@
 
 # How to run in dev settings
 
+Run dev mode :
+```bash
+  npm install
+  npm run dev
+```
+If using yarn :
+```bash
+  yarn install
+  yarn run dev
+```
+
+if flow-type prevents you from running the app :
+
 ```bash
   npm install
   npm run flow-generate-type 
   npm run dev
 ```
 
-# Flow-type giving trouble?
+
+# Flow-type still giving you trouble?
 
 created flow-typed branch with flow-typed included.  Try this instead
 
